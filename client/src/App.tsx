@@ -1,13 +1,15 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { RouterProvider } from "react-router-dom";
-import { createRouter } from "./router";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { createRouter } from "./providers/router";
+import { ReactQueryProvider } from "./providers/ReactQueryProvider";
+import { ThemeProvider } from "./providers/theme-provider";
 
 export default function App() {
-  const queryClient = useMemo(() => new QueryClient({}), []);
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={createRouter()} />
-    </QueryClientProvider>
+    <ReactQueryProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <RouterProvider router={createRouter()} />
+      </ThemeProvider>
+    </ReactQueryProvider>
   );
 }
