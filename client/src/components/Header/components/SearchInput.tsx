@@ -6,7 +6,7 @@ export const SearchInput = () => {
   return (
     <div
       id="search input"
-      className="flex w-96 items-center gap-2 rounded-sm  bg-secondary p-3 max-lg:w-[240px]"
+      className="flex w-96 items-center gap-2 rounded-sm  bg-background p-3 max-lg:w-[240px]"
     >
       <Search className="h-4 w-4 text-grayIcon" />
       <input

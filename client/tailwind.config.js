@@ -31,6 +31,7 @@ module.exports = {
         garyColor: "var(--garyColor)",
         borderDivider: "var(--borderDivider)",
         grayIcon: "var(--grayIcon)",
+        white: "var(--white)",
         primary: {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",
@@ -52,8 +53,8 @@ module.exports = {
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "var(--popover)",
+          foreground: "var(--popover-foreground)",
         },
         card: {
           DEFAULT: "hsl(var(--card))",

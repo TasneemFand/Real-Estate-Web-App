@@ -16,8 +16,8 @@ body,
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: #fcfcfc;
+    --popover-foreground: #808191;
 
     --primary: #475be8;
     --primary-foreground: #11142d;
@@ -45,6 +45,7 @@ body,
     --garyColor: #808191;
     --borderDivider: #e4e4e4;
     --grayIcon: #66687b;
+    --white: #fcfcfc;
   }
 
   .dark {
@@ -60,8 +61,8 @@ body,
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: #1a1d1f;
+    --popover-foreground: #808191;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
@@ -80,6 +81,7 @@ body,
     --garyColor: #6f767e;
     --borderDivider: #272b30;
     --grayIcon: #66687b;
+    --white: #1a1d1f;
   }
 
   input {
@@ -101,12 +103,12 @@ body,
 }
 
 .ActiveLink {
-  @apply bg-primary text-white;
+  @apply bg-primary text-[#EFEFEF];
 }
 
 .hoverLink {
   &:hover {
-    @apply bg-primary text-white;
+    @apply bg-primary text-[#EFEFEF];
   }
 }
 
