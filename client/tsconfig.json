@@ -4,7 +4,8 @@
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "baseUrl": ".",
-    "outDir": "./dist",
+    "outDir": "dist",
+    "sourceMap": true,
     "paths": {
       "@/*": ["./src/*"]
     },
