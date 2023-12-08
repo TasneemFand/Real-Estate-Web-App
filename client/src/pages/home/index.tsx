@@ -6,7 +6,7 @@ import { PropertyList } from "./components/PropertyList";
 export default function Home() {
   const { t } = useTranslation("layoutSideBar");
   return (
-    <div className="flex h-full flex-col flex-wrap items-start gap-4  px-5 py-6">
+    <div className="flex h-full w-full flex-col flex-wrap items-start gap-4  px-5 py-6">
       <span className="text- mb-4 text-2xl font-bold text-foreground">
         {t("Dashboard")}
       </span>
