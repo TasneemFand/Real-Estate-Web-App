@@ -1,6 +1,7 @@
 {
-  "name": "vite-mern-template",
-  "version": "1.0.1",
+  "name": "server",
+  "version": "1.0.0",
+  "type": "module",
   "main": "server/src/index.ts",
   "scripts": {
     "watch": "tsc --watch",
@@ -11,8 +12,6 @@
     "build:server": "tsc",
     "build:client": "npm run build --prefix ./client"
   },
-  "repository": "https://github.com/apicgg/vite-mern-template.git",
-  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.3.1",
