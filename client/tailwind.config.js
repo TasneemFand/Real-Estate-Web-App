@@ -32,6 +32,7 @@ module.exports = {
         borderDivider: "var(--borderDivider)",
         grayIcon: "var(--grayIcon)",
         white: "var(--white)",
+        hoverColor: "var(--hoverColor)",
         primary: {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",

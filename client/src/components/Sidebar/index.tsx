@@ -4,7 +4,7 @@ import logo from "../../assets/logo.png";
 import { useTranslation } from "react-i18next";
 import resources from "@/types/resources";
 
-type KeyboardEventKeys = keyof typeof resources.layoutSideBar;
+type TranslationKeys = keyof typeof resources.layoutSideBar;
 
 export const SideBar = () => {
   const { t } = useTranslation("layoutSideBar");
@@ -32,7 +32,7 @@ export const SideBar = () => {
         >
           {menu.Icon}
           <span className="text-base font-bold">
-            {t([menu.title as unknown as KeyboardEventKeys])}
+            {t([menu.title as unknown as TranslationKeys])}
           </span>
         </NavLink>
       ))}
