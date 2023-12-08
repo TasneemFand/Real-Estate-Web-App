@@ -4,10 +4,9 @@
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "baseUrl": ".",
+    "outDir": "./dist",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
     "allowJs": false,
     "skipLibCheck": true,
