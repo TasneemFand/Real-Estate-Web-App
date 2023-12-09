@@ -5,11 +5,19 @@ import compression from "compression";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import { connectDB } from './mongoDB/connect.ts';
+import router from './routers';
 
 dotenv.config();
 
 const app = express();
-app.use(cors());
+const corsOptions ={
+  origin:'http://localhost:3000', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
+app.use(
+  cors(corsOptions)
+);
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -31,3 +39,5 @@ const startServer = async () => {
   };
   
   startServer();
+
+  app.use('/', router());
