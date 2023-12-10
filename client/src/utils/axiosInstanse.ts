@@ -27,7 +27,7 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-const getCookie = (cname: string) => {
+export const getCookie = (cname: string) => {
   const name = cname + "=";
   const ca = document.cookie.split(";");
   for (let i = 0; i < ca.length; i++) {

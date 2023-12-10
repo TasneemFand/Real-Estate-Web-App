@@ -1,9 +1,10 @@
 import React from "react";
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import ErrorPage from "../components/error-page";
-import { getDefaultLayout, getNoneLayout } from "../components/layout";
+import { getDefaultLayout } from "../components/layout";
 import HomePage from "../pages/home";
 import SignIn from "@/pages/auth/signIn";
+import { useAuth } from "@/hooks/useAuth";
 import SignUp from "@/pages/auth/signUp/indes";
 
 type TRoute = RouteObject & {
@@ -16,19 +17,10 @@ export const routerObjects: TRoute[] = [
     path: "/",
     Component: HomePage,
   },
-  {
-    path: "/login",
-    Component: SignIn,
-    getLayout: getNoneLayout,
-  },
-  {
-    path: "/register",
-    Component: SignUp,
-    getLayout: getNoneLayout,
-  },
 ];
 
 export function createRouter(): ReturnType<typeof createBrowserRouter> {
+  const authenticated = useAuth();
   const routeWrappers = routerObjects.map((router) => {
     // @ts-ignore TODO: better type support
     const getLayout = router?.getLayout || getDefaultLayout;
@@ -36,10 +28,22 @@ export function createRouter(): ReturnType<typeof createBrowserRouter> {
     const page = getLayout(<Component />);
     return {
       ...router,
-      element: page,
+      element: authenticated ? page : <SignIn />,
       Component: null,
       errorElement: <ErrorPage />,
     };
+  });
+  routeWrappers.push({
+    path: "/login",
+    element: <SignIn />,
+    Component: null,
+    errorElement: <ErrorPage />,
+  });
+  routeWrappers.push({
+    path: "/register",
+    element: <SignUp />,
+    Component: null,
+    errorElement: <ErrorPage />,
   });
   return createBrowserRouter(routeWrappers);
 }
