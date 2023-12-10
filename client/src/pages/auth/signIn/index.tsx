@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignIn } from "../api/useSignIn";
 import { Toaster, toast } from "react-hot-toast";
 
@@ -26,6 +26,7 @@ const formSchema = z.object({
     .min(8, { message: "Password has to be at least 8 characters." }),
 });
 export default function SignIn() {
+  const navigate = useNavigate();
   const { t } = useTranslation("auth");
   const handleSignIn = useSignIn();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -38,10 +39,17 @@ export default function SignIn() {
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
-      await handleSignIn({ ...data });
-      toast.success("Succesfully Logged!");
+      await handleSignIn({ ...data })
+        .then((data) => {
+          toast.success("Succesfully Logged!");
+          document.cookie = `user=${data.authentication.sessionToken}; Secure`;
+          navigate("/", { replace: true });
+        })
+        .catch((error) => {
+          toast.error(error.response.data);
+        });
     } catch {
-      toast.error("Error Occured, please try again!");
+      toast.error("Something went wrong!");
     }
   }
   return (

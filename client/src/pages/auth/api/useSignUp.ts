@@ -26,7 +26,7 @@ export const useSignUp = () => {
   });
 
   const handleSignUp = async ({ email, password, username }: TSignUpData) => {
-    await mutation.mutateAsync({
+    return await mutation.mutateAsync({
       email,
       password,
       username,

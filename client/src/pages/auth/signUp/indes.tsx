@@ -42,10 +42,11 @@ export default function SignUp() {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
-      await handleSignUp({ ...data });
-      toast.success("Succesfully Registerd!");
+      await handleSignUp({ ...data })
+        .then(() => toast.success("Succesfully Registerd!"))
+        .catch((error) => toast.error(error.response.data));
     } catch {
-      toast.error("Error Occured, please try again!");
+      toast.error("Something went wrong!");
     }
   };
   return (
