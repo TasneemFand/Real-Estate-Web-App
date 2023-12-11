@@ -9,6 +9,10 @@ const UserSchema = new mongoose.Schema({
       salt: { type: String, select: false },
       sessionToken: { type: String, select: false },
     },
+    allProperties: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Property',
+    }],
   });
 
   export const UserModel = mongoose.model("User", UserSchema);
