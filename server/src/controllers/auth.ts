@@ -45,7 +45,7 @@ export const login = async (req: express.Request, res: express.Response) => {
     const user = await getUserByEmail(email).select('+authentication.salt +authentication.password');
 
     if (!user) {
-      res.status(400).send('User is not exist');
+      res.status(404).send('User is not exist');
       return res;
     }
 
