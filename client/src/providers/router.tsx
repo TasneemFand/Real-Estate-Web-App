@@ -6,6 +6,7 @@ import HomePage from "../pages/home";
 import SignIn from "@/pages/auth/signIn";
 import { useAuth } from "@/hooks/useAuth";
 import SignUp from "@/pages/auth/signUp/indes";
+import PropertyPage from "@/pages/property";
 
 type TRoute = RouteObject & {
   getLayout?: (
@@ -16,6 +17,10 @@ export const routerObjects: TRoute[] = [
   {
     path: "/",
     Component: HomePage,
+  },
+  {
+    path: "/property",
+    Component: PropertyPage,
   },
 ];
 

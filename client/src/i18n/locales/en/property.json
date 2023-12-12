@@ -1,0 +1,16 @@
+{
+  "PropertyList": "Property List",
+  "AddProperty": "Add Property",
+  "SearchByAddress": "Enter an address, city",
+  "AnyStatus": "Any Status",
+  "ForSale": "For Sale",
+  "ForRent": "For Rent",
+  "AnyType": "Any Type",
+  "Apartments": "Apartments",
+  "Houses": "Houses",
+  "Commercial": "Commercial",
+  "Garages": "Garages",
+  "Lots": "Lots",
+  "AllCountries": "All Countries",
+  "AllStates": "All States"
+}

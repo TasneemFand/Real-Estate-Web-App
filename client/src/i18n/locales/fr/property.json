@@ -1,0 +1,16 @@
+{
+  "PropertyList": "Liste des propriétés",
+  "AddProperty": "Ajouter une propriété",
+  "SearchByAddress": "Entrez une adresse, une ville",
+  "AnyStatus": "N'importe quel statut",
+  "ForSale": "À vendre",
+  "ForRent": "A louer",
+  "AnyType": "N'importe quel type",
+  "Apartments": "Appartements",
+  "Houses": "Maisons",
+  "Commercial": "Commercial",
+  "Garages": "Garage",
+  "Lots": "Beaucoup",
+  "AllCountries": "Tous les pays",
+  "AllStates": "Tous les États"
+}

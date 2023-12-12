@@ -122,3 +122,6 @@ body,
   background-image: url("../assets/register.png");
   background-size: cover;
 }
+.selectCountry {
+  @apply h-10 max-w-full rounded-sm bg-background px-3 text-sm text-foreground focus-visible:outline-none;
+}
