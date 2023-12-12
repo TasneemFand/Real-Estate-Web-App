@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { RouterProvider } from "react-router-dom";
 import { createRouter } from "./providers/router";
 import { ReactQueryProvider } from "./providers/ReactQueryProvider";
@@ -8,7 +8,9 @@ export default function App() {
   return (
     <ReactQueryProvider>
       <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-        <RouterProvider router={createRouter()} />
+        <Suspense fallback="..loading">
+          <RouterProvider router={createRouter()} />
+        </Suspense>
       </ThemeProvider>
     </ReactQueryProvider>
   );

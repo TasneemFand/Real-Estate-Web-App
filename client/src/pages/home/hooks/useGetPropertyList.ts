@@ -2,8 +2,7 @@ import { TProperty } from "@/types/data";
 import { axiosInstance } from "@/utils/axiosInstanse";
 import { useQuery } from "react-query";
 
-const fetchProperties = async ({ queryKey }: { queryKey: any }) => {
-  const [_key, { filter }] = queryKey;
+const fetchProperties = async (filter: any) => {
   const response = await axiosInstance.get(
     `${import.meta.env.VITE_API_BASE_URL}/propertyList?${filter}=true`
   );
@@ -11,10 +10,10 @@ const fetchProperties = async ({ queryKey }: { queryKey: any }) => {
 };
 
 export const useGetPropertyList = (filter: string) => {
-  const { data, isLoading } = useQuery({
-    queryKey: ["propertyList", { filter }],
-    queryFn: fetchProperties,
-    suspense: true,
-  });
+  const { data, isLoading } = useQuery(
+    ["propertyList", filter],
+    () => fetchProperties(filter),
+    { suspense: true }
+  );
   return { data: data as TProperty[], isLoading };
 };
