@@ -10,10 +10,8 @@ const fetchProperties = async (filter: any) => {
 };
 
 export const useGetPropertyList = (filter: string) => {
-  const { data, isLoading } = useQuery(
-    ["propertyList", filter],
-    () => fetchProperties(filter),
-    { suspense: true }
+  const { data, isLoading } = useQuery(["propertyList", filter], () =>
+    fetchProperties(filter)
   );
   return { data: data as TProperty[], isLoading };
 };

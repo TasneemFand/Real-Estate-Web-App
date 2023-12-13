@@ -9,7 +9,7 @@ type TProps = {
 };
 export const Paginate = ({ handlePage, page, totalPages }: TProps) => {
   return (
-    <div className="mt-auto flex items-center justify-between px-2">
+    <div className="mt-auto flex items-center justify-between px-2 py-2">
       <div className="flex-1 text-sm text-secondary-foreground">
         Showing 1 to 10 Propertys
       </div>
