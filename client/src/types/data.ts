@@ -3,6 +3,7 @@ export type TProperty = {
   location: {
     country: string;
     city: string;
+    address: string;
   };
   description: string;
   price: number;
@@ -13,3 +14,5 @@ export type TProperty = {
   photo: string;
   agent: string;
 };
+
+export type TCreateProperty = Partial<TProperty>;

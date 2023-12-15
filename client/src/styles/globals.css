@@ -125,3 +125,6 @@ body,
 .selectCountry {
   @apply h-10 max-w-full rounded-sm bg-background px-3 text-sm text-foreground focus-visible:outline-none;
 }
+.formSelect {
+  @apply w-full;
+}
