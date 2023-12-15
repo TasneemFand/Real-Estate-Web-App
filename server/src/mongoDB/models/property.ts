@@ -4,9 +4,9 @@ import mongoose from "mongoose";
 const PropertySchema = new mongoose.Schema({
     name: { type: String, required: true },
     location: {
-        country: { type: String },
-        city: { type: String },
-        address: {type: String},
+        country: { type: String, required: true },
+        city: { type: String, required: true },
+        address: {type: String, required: true}
     },
     description: {
         type: String,
@@ -19,12 +19,8 @@ const PropertySchema = new mongoose.Schema({
     type: {type: String, required: true, enum: ['Apartments', 'Houses', 'Commercial', 'Garages' ,'Lots']},
     photo: {
         type: String,
-        // required: true,
+        required: true,
     },
-    // facillity: {
-        
-    //     required: true,
-    // },
     agent: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
