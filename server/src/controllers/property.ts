@@ -1,5 +1,16 @@
 import express from 'express';
-import { getFilteredProperties, getPaginatedProperties, getPopularProperties, getRecentProperties, getRecommendedProperties, getTotalCount } from '../mongoDB/models/property';
+import { createProperty, getFilteredProperties, getPaginatedProperties, getPopularProperties, getRecentProperties, getRecommendedProperties, getTotalCount } from '../mongoDB/models/property';
+import * as dotenv from 'dotenv';
+import { v2 as cloudinary } from 'cloudinary';
+import { get } from 'lodash';
+
+dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export const getPropertyList = async (req: express.Request, res: express.Response) => {
     try {
@@ -43,4 +54,31 @@ export const getAllProperties = async (req: express.Request, res: express.Respon
         console.log(error);
         return res.sendStatus(500);
       }
+}
+
+export const AddProperty = async (req: express.Request, res: express.Response) => {
+  try{
+    const requiredValues = ['name', 'country', 'city', 'address', 'description', 'price', 'Status', 'type', 'photo'];
+    const Invalied = requiredValues.filter((value) => !Object.hasOwn(req.body, value)).length > 0;
+    if(Invalied) {
+      res.status(400).send('Missing required values');
+      return res;
+    }
+    const photoUrl = await cloudinary.uploader.upload(req.body.photo);
+    const currentUserId = get(req, 'identity._id') as unknown as string;
+    const property = await createProperty({
+      ...req.body,
+      location: {
+        country: req.body.country,
+        city: req.body.city,
+        address: req.body.address
+      },
+      photo: photoUrl.url,
+      agent: currentUserId
+    });
+    return res.status(200).json(property).end();
+  } catch (error) {
+      console.log(error);
+      return res.sendStatus(500);
+  }
 }

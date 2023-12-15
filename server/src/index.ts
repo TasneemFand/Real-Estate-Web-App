@@ -20,7 +20,7 @@ app.use(
 );
 app.use(compression());
 app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 
 app.get('/', (_req, res) => {
     res.status(200).json({
