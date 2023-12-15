@@ -1,35 +1,21 @@
 import { useTranslation } from "react-i18next";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { StatusFilter, TypeFilter } from "@/data/PropertyToolbarFilters";
-import resources from "@/types/resources";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { Search } from "lucide-react";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { SelectCompo } from "./Select";
+import { useQueryKeys } from "../hooks/useQueryKeys";
 
-type TranslationKeys = keyof typeof resources.property;
-type TProps = {
-  handleFilters: Dispatch<
-    SetStateAction<{
-      location: string;
-      Status: string;
-      type: string;
-    }>
-  >;
-};
-export const PropertyFilters = ({ handleFilters }: TProps) => {
+export const PropertyFilters = () => {
   const { t } = useTranslation("property");
   const inputRef = useRef<HTMLInputElement>(null);
   const [countryRegion, setCountryRegion] = useState({
     country: "",
     region: "",
   });
+  const { onFiltersChange } = useQueryKeys();
+
   return (
     <div className="flex flex-wrap gap-3">
       <div
@@ -39,7 +25,7 @@ export const PropertyFilters = ({ handleFilters }: TProps) => {
         <Search
           className="h-4 w-4 cursor-pointer text-grayIcon"
           onClick={() =>
-            handleFilters((old) => ({
+            onFiltersChange((old) => ({
               ...old,
               location: inputRef.current?.value || "",
             }))
@@ -52,54 +38,30 @@ export const PropertyFilters = ({ handleFilters }: TProps) => {
           className=" text-sm text-foreground placeholder:text-foreground"
         />
       </div>
-      <Select
+      <SelectCompo
+        defaultValue="AnyStatus"
         onValueChange={(value) =>
-          handleFilters((old) => ({
+          onFiltersChange((old) => ({
             ...old,
             Status: value,
           }))
         }
-      >
-        <SelectTrigger className="w-40 rounded-sm bg-background text-foreground placeholder:text-foreground">
-          <SelectValue placeholder="Any Status" />
-        </SelectTrigger>
-        <SelectContent defaultValue="AnyStatus">
-          <SelectGroup>
-            {StatusFilter.map((select) => (
-              <SelectItem
-                value={select.value}
-                className="text-secondary-foreground"
-              >
-                {t([select.displayedValue as TranslationKeys])}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <Select
+        placeholder="Any Status"
+        items={StatusFilter}
+        form={false}
+      />
+      <SelectCompo
+        defaultValue="AnyType"
         onValueChange={(value) =>
-          handleFilters((old) => ({
+          onFiltersChange((old) => ({
             ...old,
             type: value,
           }))
         }
-      >
-        <SelectTrigger className="w-40 rounded-sm bg-background text-foreground placeholder:text-foreground">
-          <SelectValue placeholder="Any Type" />
-        </SelectTrigger>
-        <SelectContent defaultValue="AnyType">
-          <SelectGroup>
-            {TypeFilter.map((select) => (
-              <SelectItem
-                value={select.value}
-                className="text-secondary-foreground"
-              >
-                {t([select.displayedValue as TranslationKeys])}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+        placeholder="Any Type"
+        items={TypeFilter}
+        form={false}
+      />
       <CountryDropdown
         value={countryRegion.country}
         classes="selectCountry"
