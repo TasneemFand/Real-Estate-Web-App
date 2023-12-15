@@ -7,6 +7,7 @@ export const axiosInstance = axios.create({
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
+    "Cache-Control": "public, max-age=3600",
   },
 });
 

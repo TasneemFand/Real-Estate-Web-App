@@ -6,8 +6,10 @@ type TProps = {
 };
 export const PropertyCard = ({ property }: TProps) => {
   return (
-    <div className="flex">
-      <div className="h-32 w-56"></div>
+    <div className="flex items-center gap-4">
+      <div className="w-72">
+        <img src={property.photo} alt="property image" className="rounded-sm" />
+      </div>
       <div className="flex flex-col items-start gap-3">
         <p className="text-base font-semibold text-foreground">
           {property.name}

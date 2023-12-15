@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ChevronsLeft } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import { useQueryKeys } from "../hooks/useQueryKeys";
 
 type TProps = {
-  page: number;
-  handlePage: Dispatch<SetStateAction<number>>;
   totalPages: number;
 };
-export const Paginate = ({ handlePage, page, totalPages }: TProps) => {
+export const Paginate = ({ totalPages }: TProps) => {
+  const { page, onPageChange } = useQueryKeys();
+
   return (
     <div className="mt-auto flex items-center justify-between px-2 py-2">
       <div className="flex-1 text-sm text-secondary-foreground">
@@ -21,7 +21,7 @@ export const Paginate = ({ handlePage, page, totalPages }: TProps) => {
           <Button
             variant="outline"
             className="h-8 w-8 p-0"
-            onClick={() => handlePage(1)}
+            onClick={() => onPageChange(1)}
             disabled={page === 1}
           >
             <span className="sr-only">Go to first page</span>
@@ -30,7 +30,7 @@ export const Paginate = ({ handlePage, page, totalPages }: TProps) => {
           <Button
             variant="outline"
             className="h-8 w-8 p-0"
-            onClick={() => handlePage((old) => Math.max(old - 1, 0))}
+            onClick={() => onPageChange(Math.max(page - 1, 0))}
             disabled={page === 1}
           >
             <span className="sr-only">Go to previous page</span>
@@ -41,7 +41,7 @@ export const Paginate = ({ handlePage, page, totalPages }: TProps) => {
             className="h-8 w-8 p-0"
             onClick={() => {
               if (page < totalPages) {
-                handlePage((old) => old + 1);
+                onPageChange(page + 1);
               }
             }}
             disabled={page === totalPages || totalPages === 0}

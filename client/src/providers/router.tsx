@@ -7,6 +7,7 @@ import SignIn from "@/pages/auth/signIn";
 import { useAuth } from "@/hooks/useAuth";
 import SignUp from "@/pages/auth/signUp/indes";
 import PropertyPage from "@/pages/property";
+import { CreatePropertyModal } from "@/pages/property/components/createPropertyModal";
 
 type TRoute = RouteObject & {
   getLayout?: (
@@ -21,6 +22,12 @@ export const routerObjects: TRoute[] = [
   {
     path: "/property",
     Component: PropertyPage,
+    children: [
+      {
+        path: "create",
+        element: <CreatePropertyModal />,
+      },
+    ],
   },
 ];
 

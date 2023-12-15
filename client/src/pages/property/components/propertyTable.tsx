@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { PropertyFilters } from "./PropertyFilters";
 import { Paginate } from "./paginate";
 import { useFetchProperties } from "../hooks/useFetchProperties";
@@ -6,16 +5,11 @@ import MoonLoader from "react-spinners/MoonLoader";
 import { PropertyCard } from "./propertyCard";
 
 export const PropertyTable = () => {
-  const [page, setPage] = useState(1);
-  const [filters, setFilters] = useState({
-    location: "",
-    Status: "",
-    type: "",
-  });
-  const { data, isLoading } = useFetchProperties(page, filters);
+  const { data, isLoading } = useFetchProperties();
+
   return (
     <div className="flex h-screen w-full flex-col rounded-2xl bg-white px-3 py-4">
-      <PropertyFilters handleFilters={setFilters} />
+      <PropertyFilters />
       {isLoading ? (
         <MoonLoader color="#475be8" speedMultiplier={0.5} className="m-auto" />
       ) : (
@@ -27,16 +21,12 @@ export const PropertyTable = () => {
               </p>
             </div>
           ) : null}
-          <div className="mt-6 flex w-full flex-wrap gap-8 overflow-scroll px-4 py-5">
+          <div className="mt-6 flex w-full flex-wrap justify-between gap-8 overflow-y-scroll px-4 py-5">
             {data.properties.map((prop) => (
               <PropertyCard property={prop} />
             ))}
           </div>
-          <Paginate
-            page={page}
-            handlePage={setPage}
-            totalPages={data.totalPages}
-          />
+          <Paginate totalPages={data.totalPages} />
         </>
       )}
     </div>
