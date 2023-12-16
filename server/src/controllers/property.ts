@@ -1,16 +1,8 @@
 import express from 'express';
 import { createProperty, getFilteredProperties, getPaginatedProperties, getPopularProperties, getRecentProperties, getRecommendedProperties, getTotalCount } from '../mongoDB/models/property';
-import * as dotenv from 'dotenv';
-import { v2 as cloudinary } from 'cloudinary';
+import sharp from 'sharp';
+import { UploadImage } from '../helpers';
 import { get } from 'lodash';
-
-dotenv.config();
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 export const getPropertyList = async (req: express.Request, res: express.Response) => {
     try {
@@ -58,22 +50,28 @@ export const getAllProperties = async (req: express.Request, res: express.Respon
 
 export const AddProperty = async (req: express.Request, res: express.Response) => {
   try{
-    const requiredValues = ['name', 'country', 'city', 'address', 'description', 'price', 'Status', 'type', 'photo'];
-    const Invalied = requiredValues.filter((value) => !Object.hasOwn(req.body, value)).length > 0;
-    if(Invalied) {
+    const requiredValues = ['name', 'country', 'city', 'address', 'description', 'price', 'Status', 'type'];
+    const reqBody = JSON.parse(req.body.data);
+    const Invalid = requiredValues.filter((value) => !Object.hasOwn(reqBody, value)).length > 0;
+    if(Invalid || !req.file) {
       res.status(400).send('Missing required values');
       return res;
     }
-    const photoUrl = await cloudinary.uploader.upload(req.body.photo);
+    const data = await sharp(req.file?.buffer).webp({ quality: 20 }).toBuffer();
+    const result = await UploadImage(data);
+    let photoUrl = '';
+    if(result) {
+      photoUrl = (result as {url: string}).url;
+    }
     const currentUserId = get(req, 'identity._id') as unknown as string;
     const property = await createProperty({
-      ...req.body,
+      ...reqBody,
       location: {
-        country: req.body.country,
-        city: req.body.city,
-        address: req.body.address
+        country: reqBody.country,
+        city: reqBody.city,
+        address: reqBody.address
       },
-      photo: photoUrl.url,
+      photo: photoUrl,
       agent: currentUserId
     });
     return res.status(200).json(property).end();
