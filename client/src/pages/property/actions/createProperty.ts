@@ -6,8 +6,11 @@ export const useCreateProperty = () => {
   const createProperty = async (values: TCreateProperty) => {
     const response = await axiosInstance.post(
       `${import.meta.env.VITE_API_BASE_URL}/createProperty`,
+      values,
       {
-        ...values,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       }
     );
     return { property: response.data };

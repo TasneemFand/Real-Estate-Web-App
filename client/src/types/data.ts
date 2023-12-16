@@ -15,4 +15,7 @@ export type TProperty = {
   agent: string;
 };
 
-export type TCreateProperty = Partial<TProperty>;
+export type TCreateProperty = {
+  file: File;
+  data: Partial<TProperty>;
+};

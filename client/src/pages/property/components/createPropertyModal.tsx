@@ -27,6 +27,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCreateProperty } from "../actions/createProperty";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { TProperty } from "@/types/data";
 
 export const formSchema = z.object({
   name: z.string().min(1, { message: "Name has to be filled." }),
@@ -42,7 +43,7 @@ export const formSchema = z.object({
 
 export const CreatePropertyModal = () => {
   const navigate = useNavigate();
-  const [propertyImage, setPropertyImage] = useState({ name: "", url: "" });
+  const [file, setFile] = useState<File | undefined>();
 
   const handleClose = () => navigate("/property");
   const { t } = useTranslation("property");
@@ -54,24 +55,17 @@ export const CreatePropertyModal = () => {
   const { isLoading, handleCreateProperty } = useCreateProperty();
 
   const handleImageChange = (file: File | undefined) => {
-    const reader = (readFile: File) =>
-      new Promise<string>((resolve, reject) => {
-        const fileReader = new FileReader();
-        fileReader.onload = () => resolve(fileReader.result as string);
-        fileReader.readAsDataURL(readFile);
-      });
-    if (!file) return alert("Please upload a property image");
-    reader(file).then((result: string) =>
-      setPropertyImage({ name: file?.name, url: result })
-    );
+    setFile(file);
   };
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const formData = new FormData();
+    formData.append("file", file as File);
+    formData.append("data", JSON.stringify(data));
     try {
       await handleCreateProperty({
-        ...data,
-        price: Number(data.price),
-        photo: propertyImage.url,
+        file: formData.get("file") as File,
+        data: formData.get("data") as Partial<TProperty>,
       })
         .then(() => {
           toast.success("Succesfully Created!");
@@ -240,6 +234,7 @@ export const CreatePropertyModal = () => {
                         name="photo"
                         type="file"
                         accept="image/*"
+                        required
                         onChange={(e) => handleImageChange(e.target.files?.[0])}
                       />
                     </FormControl>
