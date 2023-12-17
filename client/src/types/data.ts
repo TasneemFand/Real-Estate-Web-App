@@ -13,6 +13,17 @@ export type TProperty = {
   type: string;
   photo: string;
   agent: string;
+  _id: string;
+  facility: {
+    wifi: boolean;
+    rooms: number;
+    baths: number;
+    space: number;
+    smookingArea: boolean;
+    parkingArea: boolean;
+    kitchen: boolean;
+    balcon: boolean;
+  };
 };
 
 export type TCreateProperty = {
