@@ -10,11 +10,11 @@ export default function PropertyPage() {
   return (
     <div className="flex h-full w-full flex-col flex-wrap items-start gap-4  px-5 py-6">
       <div className="flex w-full justify-between">
-        <span className="text- mb-4 text-2xl font-bold text-foreground">
+        <span className="mb-4 text-2xl font-bold text-foreground">
           {t("PropertyList")}
         </span>
         <Link
-          className="rounded-md bg-primary p-4 text-sm text-white"
+          className="rounded-md bg-primary p-4 text-sm text-white dark:text-foreground"
           to={"create"}
           state={page}
         >

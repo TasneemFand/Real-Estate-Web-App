@@ -21,7 +21,7 @@ export const PropertyTable = () => {
               </p>
             </div>
           ) : null}
-          <div className="mt-6 flex w-full flex-wrap justify-between gap-8 overflow-y-scroll px-4 py-5">
+          <div className="mt-6 flex w-full flex-wrap  gap-8 overflow-y-scroll py-5">
             {data.properties.map((prop) => (
               <PropertyCard property={prop} />
             ))}

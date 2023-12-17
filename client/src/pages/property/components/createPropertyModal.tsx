@@ -236,6 +236,7 @@ export const CreatePropertyModal = () => {
                         accept="image/*"
                         required
                         onChange={(e) => handleImageChange(e.target.files?.[0])}
+                        className="bg-background text-foreground"
                       />
                     </FormControl>
                     <FormMessage />

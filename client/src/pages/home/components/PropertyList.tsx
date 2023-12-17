@@ -43,7 +43,7 @@ export const PropertyList = () => {
                     <div className="rounded-[4px] bg-[#DADEFA] px-1 py-2 font-semibold text-primary">{`$ ${data.price}`}</div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <MapPin className="h-3 w-3" />
+                    <MapPin className="h-3 w-3 dark:text-secondary-foreground" />
                     <span className="text-sm text-secondary-foreground">
                       {`${data.location.country}, ${data.location.city}`}
                     </span>

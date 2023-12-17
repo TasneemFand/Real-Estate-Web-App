@@ -1,21 +1,27 @@
 import { TProperty } from "@/types/data";
 import { MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 type TProps = {
   property: TProperty;
 };
 export const PropertyCard = ({ property }: TProps) => {
+  const navigate = useNavigate();
   return (
-    <div className="flex flex-1 items-center gap-4">
-      <div className="flex-2 w-72">
-        <img src={property.photo} alt="property image" className="rounded-sm" />
-      </div>
+    <div
+      className="flex flex-1 cursor-pointer items-center gap-4"
+      onClick={() => navigate(`${property._id}`, { state: property })}
+    >
+      <div
+        className={`h-full w-72 flex-[0.5] bg-contain bg-no-repeat`}
+        style={{ backgroundImage: `url(${property.photo})` }}
+      />
       <div className="flex flex-1 flex-col items-start gap-3">
-        <p className="text-base font-semibold text-foreground">
+        <p className="whitespace-nowrap text-base font-semibold text-foreground hover:underline">
           {property.name}
         </p>
         <div className="flex items-center gap-2">
-          <MapPin className="h-3 w-3" />
+          <MapPin className="h-3 w-3 dark:text-secondary-foreground" />
           <span className="text-sm text-secondary-foreground">
             {`${property.location.country}, ${property.location.city}`}
           </span>
