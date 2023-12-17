@@ -13,6 +13,22 @@ export const getAllUsers = async (_req: express.Request, res: express.Response) 
   }
 };
 
+export const getAgentOfProperty = async (req: express.Request, res: express.Response) => {
+  try {
+    const { id } = req.params;
+    if(!id) {
+      res.status(400).send('missing id');
+      return res;
+    }
+    const user = await getUserById(id);
+
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+};
+
 export const deleteUser = async (req: express.Request, res: express.Response) => {
     try {
       const { id } = req.params;
