@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import SignUp from "@/pages/auth/signUp/indes";
 import PropertyPage from "@/pages/property";
 import { CreatePropertyModal } from "@/pages/property/components/createPropertyModal";
+import PropertyDetailsPage from "@/pages/PropertyDetails";
 
 type TRoute = RouteObject & {
   getLayout?: (
@@ -28,6 +29,10 @@ export const routerObjects: TRoute[] = [
         element: <CreatePropertyModal />,
       },
     ],
+  },
+  {
+    path: "/property/:propertyId",
+    Component: PropertyDetailsPage,
   },
 ];
 
