@@ -24,7 +24,19 @@ const PropertySchema = new mongoose.Schema({
     agent: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-    }
+    },
+    facility: {
+        wifi: { type: Boolean, default: true },
+        rooms: {type: Number, default: 4},
+        baths: {type: Number, default: 3},
+        space: {type: Number, default: 110},
+        smookingArea: {type: Boolean, default: true},
+        parkingArea: {type: Boolean, default: false},
+        kitchen: {type: Boolean, default: true},
+        balcon: {type: Boolean, default: true}
+    },
+    review: {type: Number, default: 3},
+    otherImages: {type: Array}
   }, {timestamps: true});
 
 export const propertyModel = mongoose.model("Property", PropertySchema);

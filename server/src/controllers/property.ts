@@ -3,6 +3,7 @@ import { createProperty, getFilteredProperties, getPaginatedProperties, getPopul
 import sharp from 'sharp';
 import { UploadImage } from '../helpers';
 import { get } from 'lodash';
+import { getUserById } from '../mongoDB/models/user';
 
 export const getPropertyList = async (req: express.Request, res: express.Response) => {
     try {
@@ -74,6 +75,9 @@ export const AddProperty = async (req: express.Request, res: express.Response) =
       photo: photoUrl,
       agent: currentUserId
     });
+    const user = await getUserById(currentUserId);
+    user?.allProperties.push(property._id);
+    await user?.save();
     return res.status(200).json(property).end();
   } catch (error) {
       console.log(error);
