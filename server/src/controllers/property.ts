@@ -1,6 +1,5 @@
 import express from 'express';
 import { createProperty, getFilteredProperties, getPaginatedProperties, getPopularProperties, getRecentProperties, getRecommendedProperties, getTotalCount } from '../mongoDB/models/property';
-import sharp from 'sharp';
 import { UploadImage } from '../helpers';
 import { get } from 'lodash';
 import { getUserById } from '../mongoDB/models/user';
@@ -58,8 +57,7 @@ export const AddProperty = async (req: express.Request, res: express.Response) =
       res.status(400).send('Missing required values');
       return res;
     }
-    const data = await sharp(req.file?.buffer).webp({ quality: 20 }).toBuffer();
-    const result = await UploadImage(data);
+    const result = await UploadImage(req.file?.buffer);
     let photoUrl = '';
     if(result) {
       photoUrl = (result as {url: string}).url;
