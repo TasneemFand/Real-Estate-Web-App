@@ -6,7 +6,7 @@ export const getNoneLayout = (page: React.ReactElement) => page;
 
 export const getDefaultLayout = (page: React.ReactElement) => {
   return (
-    <div className="flex min-h-screen min-w-full">
+    <div className="flex min-h-screen min-w-fit">
       <SideBar />
       <div className="flex w-full flex-col">
         <Header />
