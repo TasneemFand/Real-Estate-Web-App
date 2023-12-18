@@ -31,25 +31,33 @@ export const PropertyList = () => {
             />
           ) : (
             <>
-              {propertyList.map((data) => (
-                <div className="flex flex-col gap-2">
-                  <div className="h-60 w-80 rounded-md ">
-                    <img src={data.photo} alt="property image" />
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-base font-semibold text-foreground">
-                      {data.name}
-                    </span>
-                    <div className="rounded-[4px] bg-[#DADEFA] px-1 py-2 font-semibold text-primary">{`$ ${data.price}`}</div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-3 w-3 dark:text-secondary-foreground" />
-                    <span className="text-sm text-secondary-foreground">
-                      {`${data.location.country}, ${data.location.city}`}
-                    </span>
-                  </div>
+              {propertyList.length === 0 ? (
+                <div className="m-auto flex h-full items-center justify-center">
+                  <p className="text-2xl font-semibold text-foreground">
+                    No Property Found
+                  </p>
                 </div>
-              ))}
+              ) : (
+                propertyList.map((data) => (
+                  <div className="flex flex-col gap-2">
+                    <div className="h-60 w-80 rounded-md ">
+                      <img src={data.photo} alt="property image" />
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-base font-semibold text-foreground">
+                        {data.name}
+                      </span>
+                      <div className="rounded-[4px] bg-[#DADEFA] px-1 py-2 font-semibold text-primary">{`$ ${data.price}`}</div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-3 w-3 dark:text-secondary-foreground" />
+                      <span className="text-sm text-secondary-foreground">
+                        {`${data.location.country}, ${data.location.city}`}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              )}
             </>
           )}
         </div>
