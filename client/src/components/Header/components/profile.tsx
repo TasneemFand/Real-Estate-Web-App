@@ -3,10 +3,11 @@ import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import profileImg from "../../../assets/Profileimage.png";
 import { CircleUserRound, LogOut, Settings, ToggleRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/providers/theme-provider";
 
 export const Profile = () => {
   const { t } = useTranslation("layoutHeader");
-
+  const { theme, setTheme } = useTheme();
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -39,10 +40,13 @@ export const Profile = () => {
 
           <span className="text-sm font-medium">{t("logout")}</span>
         </Button>
-        <Button className="flex items-center gap-2 rounded-[5px] p-2 text-secondary-foreground hover:text-primary">
+        <Button
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className="flex items-center gap-2 rounded-[5px] p-2 text-secondary-foreground hover:text-primary"
+        >
           <ToggleRight className="h-4 w-4" />
 
-          <span className="text-sm font-medium">{t("darkMode")}</span>
+          <span className="text-sm font-medium">{theme}</span>
         </Button>
       </PopoverContent>
     </Popover>
