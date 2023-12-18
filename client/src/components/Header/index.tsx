@@ -3,6 +3,7 @@ import { SearchInput } from "./components/SearchInput";
 import { NotificationBar } from "./components/notificationBar";
 import { Profile } from "./components/profile";
 import { MobileMenu } from "./components/mobileMenu";
+import { LanguageSelector } from "./components/languageSelector";
 
 export const Header = () => {
   return (
@@ -25,6 +26,7 @@ export const Header = () => {
         <div id="profile" className="flex items-center gap-5">
           <NotificationBar />
           <Profile />
+          <LanguageSelector />
         </div>
       </nav>
     </header>

@@ -46,7 +46,9 @@ export const Profile = () => {
         >
           <ToggleRight className="h-4 w-4" />
 
-          <span className="text-sm font-medium">{theme}</span>
+          <span className="text-sm font-medium">
+            {theme === "dark" ? "light mode" : "dark mode"}
+          </span>
         </Button>
       </PopoverContent>
     </Popover>
