@@ -12,7 +12,7 @@ export const PropertyList = () => {
 
   const { data: propertyList, isLoading } = useGetPropertyList(filter);
   return (
-    <div className="flex w-full flex-col rounded-2xl bg-white px-5 py-5">
+    <div className="flex w-full max-w-[1220px] flex-col rounded-2xl bg-white px-5 py-5 ">
       <div className="flex flex-auto justify-between">
         <span className="text-lg font-semibold text-foreground">
           {t("PropertyList")}
@@ -40,9 +40,13 @@ export const PropertyList = () => {
               ) : (
                 propertyList.map((data) => (
                   <div className="flex flex-col gap-2">
-                    <div className="h-60 w-80 rounded-md ">
+                    {/* <div className="h-60 w-80 rounded-md ">
                       <img src={data.photo} alt="property image" />
-                    </div>
+                    </div> */}
+                    <div
+                      className={`h-60 w-72 bg-contain bg-no-repeat`}
+                      style={{ backgroundImage: `url(${data.photo})` }}
+                    />
                     <div className="flex justify-between">
                       <span className="text-base font-semibold text-foreground">
                         {data.name}
